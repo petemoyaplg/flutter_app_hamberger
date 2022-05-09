@@ -1,9 +1,11 @@
-import 'dart:ui';
+// ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app_hamberger/screens/burger.dart';
 
 class HambergerList extends StatefulWidget {
-  const HambergerList({Key? key}) : super(key: key);
+  final int row;
+  HambergerList({required this.row});
 
   @override
   State<HambergerList> createState() => _HambergerListState();
@@ -24,13 +26,13 @@ class _HambergerListState extends State<HambergerList> {
 
     return SliverToBoxAdapter(
       child: Container(
-        height: 250,
+        height: widget.row == 2 ? 330 : 250,
         margin: const EdgeInsets.only(top: 10),
         child: ListView.builder(
             itemCount: _items,
             scrollDirection: Axis.horizontal,
             itemBuilder: ((context, index) {
-              bool reverse = index.isEven;
+              bool reverse = widget.row == 2 ? index.isEven : index.isOdd;
               int burgerNumber = index + 1;
               return Stack(
                 children: [
@@ -41,8 +43,7 @@ class _HambergerListState extends State<HambergerList> {
                         left: 10, right: _items - 1 == index ? 10 : 0),
                     child: GestureDetector(
                       onTap: () {
-                        // ignore: todo
-                        // TODO NAVIGATOR
+                        Navigator.of(context).pushNamed(BuregerPage.tag);
                       },
                       child: Card(
                         child: Padding(
@@ -50,7 +51,9 @@ class _HambergerListState extends State<HambergerList> {
                           child: Column(
                             children: [
                               Text(
-                                'Burger $burgerNumber',
+                                reverse
+                                    ? 'Chiken Burger $burgerNumber'
+                                    : 'Bacon Burger $burgerNumber',
                                 style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,

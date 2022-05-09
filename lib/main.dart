@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_hamberger/screens/burger.dart';
 import 'package:flutter_app_hamberger/screens/categories.dart';
 import 'package:flutter_app_hamberger/screens/hambergerList.dart';
 import 'package:flutter_app_hamberger/screens/header.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const Hamberger(),
+      routes: {BuregerPage.tag: (_) => const BuregerPage()},
       debugShowCheckedModeBanner: false,
     );
   }
@@ -59,8 +61,8 @@ class _HambergerState extends State<Hamberger> {
           ),
           const Header(),
           const Categories(),
-          const HambergerList(),
-          const HambergerList(),
+          HambergerList(row: 1),
+          HambergerList(row: 2),
         ],
       ),
       extendBody: true,
